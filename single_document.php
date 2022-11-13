@@ -61,13 +61,13 @@ if (isset($_GET['id'])) {
     <!-- <script type="text/javascript" src="result.js"></script> -->
 
     <style>
-    h1 {
-        font-family: Arvo, serif;
-        text-align: center;
-        font-size: 59px;
-        position: relative;
-        right: -130px;
-    }
+        h1 {
+            font-family: Arvo, serif;
+            text-align: center;
+            font-size: 59px;
+            position: relative;
+            right: -130px;
+        }
     </style>
 
 </head>
@@ -83,7 +83,7 @@ if (isset($_GET['id'])) {
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="../cs518/login/login.php" data-toggle="modal"><span class=" glyphicon
+                <li><a href="../PROJECT/login/login.php" data-toggle="modal"><span class=" glyphicon
                         glyphicon-log-in"></span>
                         Login Page</a>
                 </li>
@@ -145,8 +145,7 @@ if (isset($_GET['id'])) {
                         <br>
                         <b>DocId:</b>
                         <center>
-                            <a href="<?php echo "/cs518/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>"
-                                target="_blank">
+                            <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
 
                                 <?php echo $r['_source']['etd_file_id']; ?>.pdf
 

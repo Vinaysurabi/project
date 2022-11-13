@@ -62,13 +62,13 @@ if (isset($_GET['id'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 
     <style>
-    h1 {
-        font-family: Arvo, serif;
-        text-align: center;
-        font-size: 59px;
-        position: relative;
-        right: -130px;
-    }
+        h1 {
+            font-family: Arvo, serif;
+            text-align: center;
+            font-size: 59px;
+            position: relative;
+            right: -130px;
+        }
     </style>
 
 </head>
@@ -136,8 +136,7 @@ require_once "config/db_config.php";
                         <br>
                         <b>DocId:</b>
                         <center>
-                            <a href="<?php echo "/cs518/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>"
-                                target="_blank">
+                            <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
 
                                 <?php echo $r['_source']['etd_file_id']; ?>.pdf
 

@@ -11,7 +11,7 @@ $mail->isHTML(true);
 
 $mail->Subject = "Digital Library Verification Email";
 
-$mail->Body = "<a href='localhost/cs518/email_verification.php?email=$email&code=$verfcode'>Click Here to Verify your Email</a>";
+$mail->Body = "<a href='localhost/PROJECT/email_verification.php?email=$email&code=$verfcode'>Click Here to Verify your Email</a>";
 echo "Sending email to " . $email . "<br>";
 
 try {
