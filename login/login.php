@@ -19,7 +19,8 @@
             <div class="form-group">
                 <div class="col-sm-4">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email-Id">
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                        placeholder="Email-Id">
                 </div>
             </div>
             <div class="form-group">
@@ -54,6 +55,33 @@
         </form>
 
     </div>
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+        <br>
+        <br>
+        <br>
+        <div class="row form-group">
+            <div class=col-sm-6 mt-5">
+                <label for="register">Search ETD's</label>
+            </div>
+        </div>
+        <form action="../search_before_signin.php" method="get" autocomplete="off">
+            <div class="row">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" value="search">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
 </body>
 
 </html>

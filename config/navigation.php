@@ -5,6 +5,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="../cs518/user_home.php">Home</a></li>
+            <li class="active"><a href="../cs518/add_document.php">Add Document</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account Settings
                     <span class="caret"></span></a>
@@ -14,6 +15,7 @@
                     <li><a href="../cs518/password/change_password.php">Change Password</a></li>
                 </ul>
             </li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['email'] ?></a></li>
