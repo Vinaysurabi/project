@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost/project/favicon_io/favicon-32x32.png">
     <style>
     .container {
         /* position: relative; */
@@ -123,3 +124,20 @@
 </div>
 
 </html>
+<?php
+require __DIR__ . "/config/bootstrap.php";
+
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = explode('/', $uri);
+
+if ((isset($uri[2]) && $uri[2] != 'user') || !isset($uri[3])) {
+    header("HTTP/1.1 404 Not Found");
+    exit();
+}
+
+require PROJECT_ROOT_PATH . "/Controller/UserController.php";
+
+$objFeedController = new UserController();
+$strMethodName = $uri[3] . 'Action';
+$objFeedController->{$strMethodName}();
+?>

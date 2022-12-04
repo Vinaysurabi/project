@@ -55,6 +55,7 @@ if (isset($_GET['q'])) {
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost/project/favicon_io/favicon-32x32.png">
 
     <title>Search | Document Search</title>
     <meta name="description" content="search-results">
@@ -64,25 +65,25 @@ if (isset($_GET['q'])) {
     <link href="styling.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arvo" />
     <style>
-        h1 {
-            font-family: Arvo, serif;
-            text-align: center;
-            font-size: 59px;
-            position: relative;
-            right: -130px;
-        }
+    h1 {
+        font-family: Arvo, serif;
+        text-align: center;
+        font-size: 59px;
+        position: relative;
+        right: -130px;
+    }
     </style>
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            var options = {
-                valueNames: ['title', 'author'],
-                page: 10,
-                pagination: true
-            }
-            var listObj = new List('listId', options);
-        });
+    $(document).ready(function() {
+        var options = {
+            valueNames: ['title', 'author'],
+            page: 10,
+            pagination: true
+        }
+        var listObj = new List('listId', options);
+    });
     </script>
 
 </head>
@@ -115,7 +116,8 @@ if (isset($_GET['q'])) {
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4">
                 <div class="input-group">
-                    <input type="text" name="q" class="search-query form-control" value="<?php echo $q; ?>" placeholder="<?php echo $q ?>">
+                    <input type="text" name="q" class="search-query form-control" value="<?php echo $q; ?>"
+                        placeholder="<?php echo $q ?>">
                     <span class="input-group-btn">
                         <button class="btn btn-danger" type="submit" value="search">
                             <span class=" glyphicon glyphicon-search"></span>
@@ -149,51 +151,52 @@ if (isset($_GET['q'])) {
             <?php
             for ($i = 0; $i < $total; $i++) {
             ?>
-                <div class="row" style="text-align: center">
-                    <div class="container">
-                        <div class="panel panel-success">
-                            <div class=panel-heading>
-                                <h2 class=panel-title>
-                                    <a href="<?php
+            <div class="row" style="text-align: center">
+                <div class="container">
+                    <div class="panel panel-success">
+                        <div class=panel-heading>
+                            <h2 class=panel-title>
+                                <a href="<?php
                                                 $output = ('http://localhost/PROJECT/single_document.php?id=' . $results[$i]['_id']);
 
                                                 echo ($output);
                                                 ?>" ONCLICK=search_document('<?php echo $output; ?>') target="_blank">
-                                        <p><br>
-                                            <?php $title = !empty($q) ? highlightWords($results[$i]['_source']['title'], $q) : $results[$i]['_source']['title'];
+                                    <p><br>
+                                        <?php $title = !empty($q) ? highlightWords($results[$i]['_source']['title'], $q) : $results[$i]['_source']['title'];
                                             echo $title; ?>
-                                    </a>
-                            </div>
-                            <br><br>
-                            <b>Author:</b>
-                            <p>
-                                <?php $author = !empty($q) ? highlightWords($results[$i]['_source']['author'], $q) : $results[$i]['_source']['author'];
+                                </a>
+                        </div>
+                        <br><br>
+                        <b>Author:</b>
+                        <p>
+                            <?php $author = !empty($q) ? highlightWords($results[$i]['_source']['author'], $q) : $results[$i]['_source']['author'];
                                 echo $author; ?>
-                            <p></p><br>
-                            <b>Year</b>
-                            <p>
-                                <?php $year = !empty($q) ? highlightWords($results[$i]['_source']['year'], $q) : $results[$i]['_source']['year'];
+                        <p></p><br>
+                        <b>Year</b>
+                        <p>
+                            <?php $year = !empty($q) ? highlightWords($results[$i]['_source']['year'], $q) : $results[$i]['_source']['year'];
                                 echo $year; ?>
 
-                            <p></p><br>
-                            <b>DocId:</b>
+                        <p></p><br>
+                        <b>DocId:</b>
 
-                            <a href="<?php echo "/PROJECT/PDF/" .  $results[$i]['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
+                        <a href="<?php echo "/PROJECT/PDF/" .  $results[$i]['_source']['etd_file_id'] . ".pdf"; ?>"
+                            target="_blank">
 
-                                <?php echo  $results[$i]['_source']['etd_file_id']; ?>
+                            <?php echo  $results[$i]['_source']['etd_file_id']; ?>
 
-                            </a>
+                        </a>
 
-                            <br>
-                            <!-- <b>DocId:</b>
+                        <br>
+                        <!-- <b>DocId:</b>
                         <center>
                             <?php echo $results[$i]['_source']['etd_file_id']; ?>
                         </center> -->
-                            <br>
+                        <br>
 
-                        </div>
                     </div>
                 </div>
+            </div>
             <?php
             }
             ?>
@@ -213,9 +216,9 @@ if (isset($_GET['q'])) {
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        function search_document(event) {
+    function search_document(event) {
 
-        }
+    }
     </script>
 
 

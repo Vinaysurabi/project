@@ -74,10 +74,14 @@ if (!empty($_POST)) {
     <title>Digital Library Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="styling.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arvo" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost/project/favicon_io/favicon-32x32.png">
 
     <style>
     h1 {
@@ -85,6 +89,15 @@ if (!empty($_POST)) {
         font-size: 59px;
         position: relative;
         right: -130px;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        padding-top: 10px;
+        background: #63c5da;
     }
     </style>
 </head>
@@ -215,16 +228,32 @@ if (!empty($_POST)) {
                 <div class="center-block">
                     <center <br><input type="submit" class="btn btn-success" value="Submit">
                     </center>
+                </div>
+            </div>
+        </div>
+
     </form>
     <br>
-    </div>
-    </div>
-    </div>
-    <!-- Footer -->
+    <!-- </div> -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Footer -->
+    <br>
+    <hr> test</h2>
+    <footer>
+        <p>Digital Library Copyright &copy;<?php $today = date("Y");
+                                            echo $today ?>.</p>
+    </footer>
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="index.js"></script>
+    <script src="index.js"></script> -->
+    <!-- <div class="row vertical-center-row">
+        <footer>
+            <p>Digital Library Copyright &copy;<?php $today = date("Y");
+                                                echo $today ?>.</p>
+        </footer>
+    </div> -->
 </body>
 
 </html>

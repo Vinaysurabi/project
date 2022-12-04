@@ -3,6 +3,66 @@ error_reporting(E_ERROR | E_PARSE);
 header('Access-Control-Allow-Headers: *');
 require_once 'init.php';
 
+function highlightTerms($text, $terms)
+{
+    $intialText = $text;
+    $highlightedText = '';
+    foreach ($terms as $term) {
+        $termWord = $term['term'];
+        $definition = getDefinition($termWord);
+        $highlightedText = preg_replace(
+            '#' . preg_quote($termWord) . '#i',
+            '<a class = "popup" href=' . $term['url'] .  '><span style="background-color: #F9F902;">\\0</span><label>' . $termWord . ' <br></label></a>',
+            $intialText
+        );
+        $intialText = $highlightedText;
+    }
+
+    return $highlightedText;
+}
+
+function getDefinition($termWord)
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://en.wikipedia.org/w/api.php?action=query&format=json&titles=" . $termWord . "&prop=extracts&exintro=True",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Basic ZGV2OnBhc3N3b3Jk",
+            "cache-control: no-cache",
+            "content-type: application/json",
+            "postman-token: 4ad6e53d-a497-3c47-a992-2d59c2b8cc7e"
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+        $string = '';
+        echo "cURL Error #:" . $err;
+    } else {
+
+        $extractResponse = json_decode($response, true);
+        $pages = $extractResponse['query']['pages'];
+        $pageId = '';
+        foreach ($pages as $key => $value) {
+            $pageId = $key;
+        }
+
+        $string = substr($extractResponse['query']['pages'][$pageId]['extract'], 0, 300);
+    }
+
+    return $string;
+}
 
 if (isset($_GET['id'])) {
     $data = $_GET['id'];
@@ -35,6 +95,7 @@ if (isset($_GET['id'])) {
             $degree = $r['_source']['degree'];
             $program = $r['_source']['program'];
             $text = $r['_source']['text'];
+            $terms =  $r['_source']['wikifier_terms'];
         }
     }
 }
@@ -58,16 +119,49 @@ if (isset($_GET['id'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+    var subject = 'radiation';
+    var url = 'https://en.wikipedia.org/w/api.php';
+    var params = {
+        'action': 'query',
+        'format': 'json',
+        'titles': subject,
+        'prop': 'extracts',
+        'exintro': "True"
+    };
+
+    console.log('test');
+
+    const res = axios.get(url, {
+            params: {
+                'action': 'query',
+                'format': 'json',
+                'titles': subject,
+                'prop': 'extracts',
+                'exintro': 'True',
+            }
+        }).then(function(response) {
+            console.log(response.data);
+        })
+        .catch(function(error) {
+            console.log('error');
+            console.error(error);
+        });
+    </script>
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost/project/favicon_io/favicon-32x32.png">
     <!-- <script type="text/javascript" src="result.js"></script> -->
 
     <style>
-        h1 {
-            font-family: Arvo, serif;
-            text-align: center;
-            font-size: 59px;
-            position: relative;
-            right: -130px;
-        }
+    h1 {
+        font-family: Arvo, serif;
+        text-align: center;
+        font-size: 59px;
+        position: relative;
+        right: -130px;
+    }
     </style>
 
 </head>
@@ -145,7 +239,8 @@ if (isset($_GET['id'])) {
                         <br>
                         <b>DocId:</b>
                         <center>
-                            <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
+                            <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>"
+                                target="_blank">
 
                                 <?php echo $r['_source']['etd_file_id']; ?>.pdf
 
@@ -157,9 +252,20 @@ if (isset($_GET['id'])) {
 
                         <b>Abstract:</b>
                         <center>
-                            <?php echo $text; ?>
+                            <?php
+
+                            $html_decode = html_entity_decode($terms);
+                            $jsonString = str_replace("'", '"', $html_decode);
+
+                            $terms =  json_decode($jsonString, true);
+
+                            ?>
+
+                            <?php $texts = !empty($text) ? highlightTerms($text, $terms) : $text;
+                            echo $texts; ?>
                         </center>
                         <br>
+
                     </div>
                 </div>
             </div>
@@ -174,6 +280,8 @@ if (isset($_GET['id'])) {
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 </body>
 

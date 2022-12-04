@@ -40,10 +40,6 @@ if (isset($_GET['q'])) {
 ?>
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,6 +50,7 @@ if (isset($_GET['q'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost/project/favicon_io/favicon-32x32.png">
 
 
     <title>Search | Document Search</title>
@@ -64,13 +61,13 @@ if (isset($_GET['q'])) {
     <link href="styling.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arvo" />
     <style>
-        h1 {
-            font-family: Arvo, serif;
-            text-align: center;
-            font-size: 59px;
-            position: relative;
-            right: -130px;
-        }
+    h1 {
+        font-family: Arvo, serif;
+        text-align: center;
+        font-size: 59px;
+        position: relative;
+        right: -130px;
+    }
     </style>
 </head>
 
@@ -94,29 +91,23 @@ if (isset($_GET['q'])) {
         }
         ?>
         <script type="text/javascript">
-            $("#verifyemail").click(function(e) {
-                $.ajax({
-                    type: "GET",
-                    url: "config/send_verification_email.php",
-                    data: {
-                        email: "<?php echo $email; ?>"
-                    },
-                    success: function(result) {
-                        alert('Email Sent!!');
-                    },
-                    error: function(result) {
-                        alert('error');
-                    }
-                });
+        $("#verifyemail").click(function(e) {
+            $.ajax({
+                type: "GET",
+                url: "config/send_verification_email.php",
+                data: {
+                    email: "<?php echo $email; ?>"
+                },
+                success: function(result) {
+                    alert('Email Sent!!');
+                },
+                error: function(result) {
+                    alert('error');
+                }
             });
+        });
         </script>
-
-
-
     </div>
-
-
-
 
 
 
@@ -154,88 +145,88 @@ if (isset($_GET['q'])) {
         foreach ($results as $r) {
     ?>
 
-            <div class="row" style="text-align: center">
-                <div class="container">
-                    <div class="panel panel-success">
-                        <div class=panel-heading>
-                            <h2 class=panel-title>
-                                <?php echo $r['_source']['title']; ?>
-                                <!-- <a href="<?php echo $r['_source']['title']; ?>" target="_blank">
+    <div class="row" style="text-align: center">
+        <div class="container">
+            <div class="panel panel-success">
+                <div class=panel-heading>
+                    <h2 class=panel-title>
+                        <?php echo $r['_source']['title']; ?>
+                        <!-- <a href="<?php echo $r['_source']['title']; ?>" target="_blank">
                             <p><br>
                                 <?php echo $r['_source']['title']; ?>
                         </a> -->
-                        </div>
-                        <br><br>
-                        <div class="row" style="text-align: center">
-                            <b>Text:</b>
-                            <?php echo $r['_source']['title']; ?>
-                        </div>
-                        <div class="row" style="text-align: center">
-                            <b>Author:</b>
-                            <?php echo $r['_source']['author']; ?>
-                        </div>
-                        <div class="">
-                            <b>Year:</b>
-                            <?php echo $r['_source']['year']; ?>
-                        </div>
-                        <div class="">
-                            <b>University:</b>
-                            <?php echo $r['_source']['university']; ?>
-                        </div>
-                        <div class="">
-                            <b>Program:</b>
-                            <?php echo $r['_source']['program']; ?>
-                        </div>
-                        <div class="">
-                            <b>Degree:</b>
-                            <?php echo $r['_source']['degree']; ?>
-                        </div>
-                        <div class="row" style="text-align: center">
-                            <b>Advisor:</b>
-                            <?php echo $r['_source']['advisor']; ?>
-                        </div>
-
-
-                        <div class="row" style="text-align: center">
-                            <b>PDF:</b>
-                            <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
-
-                                <b> <?php echo $r['_source']['etd_file_id']; ?>.pdf</b>
-                            </a>
-                            <br>
-                        </div>
-                    </div>
                 </div>
-            <?php
+                <br><br>
+                <div class="row" style="text-align: center">
+                    <b>Text:</b>
+                    <?php echo $r['_source']['title']; ?>
+                </div>
+                <div class="row" style="text-align: center">
+                    <b>Author:</b>
+                    <?php echo $r['_source']['author']; ?>
+                </div>
+                <div class="">
+                    <b>Year:</b>
+                    <?php echo $r['_source']['year']; ?>
+                </div>
+                <div class="">
+                    <b>University:</b>
+                    <?php echo $r['_source']['university']; ?>
+                </div>
+                <div class="">
+                    <b>Program:</b>
+                    <?php echo $r['_source']['program']; ?>
+                </div>
+                <div class="">
+                    <b>Degree:</b>
+                    <?php echo $r['_source']['degree']; ?>
+                </div>
+                <div class="row" style="text-align: center">
+                    <b>Advisor:</b>
+                    <?php echo $r['_source']['advisor']; ?>
+                </div>
+
+
+                <div class="row" style="text-align: center">
+                    <b>PDF:</b>
+                    <a href="<?php echo "/PROJECT/PDF/" . $r['_source']['etd_file_id'] . ".pdf"; ?>" target="_blank">
+
+                        <b> <?php echo $r['_source']['etd_file_id']; ?>.pdf</b>
+                    </a>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <?php
         }
     } else if (isset($results1)) {
         foreach ($results1 as $r) {
             ?>
 
-                <div class="row" style="text-align: center">
-                    <div class="container">
-                        <div class="panel panel-success">
-                            <div class=panel-heading>
-                                <h2 class=panel-title>
-                                    <a href="<?php echo $r['_source']['title']; ?>" target="_blank">
-                                        <p><br>
-                                            <?php echo $r['_source']['title']; ?>
-                                    </a>
-                            </div>
-                            <br><br>
-                            <b>Content:</b>
-                            <p>
-                                <?php echo $r['_source']['title']; ?>
-                            <p></p><br>
-                            <div class="">
-                                <b>DocId:</b>
-                                <center>
-                                    <?php echo $r['_id']; ?>
-                                </center>
-                                <br>
-                            </div>
-                        </div>
+        <div class="row" style="text-align: center">
+            <div class="container">
+                <div class="panel panel-success">
+                    <div class=panel-heading>
+                        <h2 class=panel-title>
+                            <a href="<?php echo $r['_source']['title']; ?>" target="_blank">
+                                <p><br>
+                                    <?php echo $r['_source']['title']; ?>
+                            </a>
                     </div>
+                    <br><br>
+                    <b>Content:</b>
+                    <p>
+                        <?php echo $r['_source']['title']; ?>
+                    <p></p><br>
+                    <div class="">
+                        <b>DocId:</b>
+                        <center>
+                            <?php echo $r['_id']; ?>
+                        </center>
+                        <br>
+                    </div>
+                </div>
+            </div>
             <?php
         }
     }
