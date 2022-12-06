@@ -36,6 +36,23 @@ if ($_POST) {
             $verify = password_verify($_POST["password"], $row['password']);
 
             if ($verify) {
+                function getName($n)
+                {
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $randomString = '';
+
+                    for ($i = 0; $i < $n; $i++) {
+                        $index = rand(0, strlen($characters) - 1);
+                        $randomString .= $characters[$index];
+                    }
+
+                    return $randomString;
+                }
+                $n = 32;
+                $token = getName($n);
+                $query = "UPDATE users set token_key = '$token' where email_id = '$email'";
+                mysqli_query($conn, $query);
+
                 echo 'Password Verified! Redirect to 2FA page';
                 header("location: login_auth.php?email=$email&action=login");
             } else {

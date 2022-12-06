@@ -235,10 +235,9 @@ if (!empty($_POST)) {
     </form>
     <br>
     <!-- </div> -->
-
+    <br>
     <!-- Footer -->
     <br>
-    <hr> test</h2>
     <footer>
         <p>Digital Library Copyright &copy;<?php $today = date("Y");
                                             echo $today ?>.</p>

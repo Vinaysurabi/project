@@ -10,7 +10,7 @@ require_once 'init.php';
 
 
 if (isset($_GET['q'])) {
-    $q = trim(strip_tags($_GET['q']));
+    $q = trim(preg_replace('/[0-9\@\.\#\$\%\;\" "]+/', '', ($_GET['q'])));
 
     $from = 0;
     $size = 10;
